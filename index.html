@@ -19,3 +19,722 @@
     --surface: #FFFFFF;
     --ink: #4A443B;
     --ink-soft: #8A8377;
+    --mint: #CDE8D6;
+    --mint-deep: #7FB893;
+    --leaf: #5FA070;
+    --coral: #F3A98C;
+    --coral-deep: #E0855F;
+    --border: #E9E2D2;
+  }
+
+  * { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--cream);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    color: var(--ink);
+    display: flex;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 28px 16px;
+  }
+
+  .app { width: 100%; max-width: 420px; }
+
+  .mascot-panel {
+    background: var(--mint);
+    border-radius: 24px;
+    padding: 20px 0 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 16px;
+  }
+
+  .mascot-svg {
+    width: 140px;
+    height: 140px;
+    animation: bob 3.6s ease-in-out infinite;
+    transform-origin: center bottom;
+  }
+  @keyframes bob {
+    0%, 100% { transform: translateY(0) scale(1, 1); }
+    50% { transform: translateY(-4px) scale(1.015, 0.985); }
+  }
+  .leaf-wiggle { animation: wiggle 3.6s ease-in-out infinite; transform-origin: 60px 26px; }
+  @keyframes wiggle {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(-4deg); }
+    75% { transform: rotate(4deg); }
+  }
+  .eyes-open { animation: blink 5s infinite; }
+  .eyes-closed { opacity: 0; animation: blinkClosed 5s infinite; }
+  @keyframes blink { 0%, 92%, 100% { opacity: 1; } 94%, 98% { opacity: 0; } }
+  @keyframes blinkClosed { 0%, 92%, 100% { opacity: 0; } 94%, 98% { opacity: 1; } }
+
+  .happy-face { display: none; }
+  .mascot-svg.is-happy .normal-face { display: none; }
+  .mascot-svg.is-happy .happy-face { display: block; }
+  .mascot-svg.is-happy { animation: celebrate 0.9s ease-in-out infinite; }
+  @keyframes celebrate {
+    0%, 100% { transform: translateY(0) scale(1, 1); }
+    35% { transform: translateY(-9px) scale(1.05, 0.95); }
+    60% { transform: translateY(0) scale(0.96, 1.04); }
+  }
+  .sparkle { animation: twinkle 1.4s ease-in-out infinite; transform-origin: center; }
+  .sparkle:nth-child(2) { animation-delay: 0.3s; }
+  .sparkle:nth-child(3) { animation-delay: 0.6s; }
+  @keyframes twinkle {
+    0%, 100% { opacity: 0.2; transform: scale(0.7); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+
+  .name-tag { margin-top: 6px; text-align: center; }
+  .name-tag .name {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-weight: 700; font-size: 18px; color: var(--leaf);
+  }
+  .name-tag .role { font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+
+  .speech-wrap { display: flex; gap: 12px; align-items: flex-start; }
+  .speech-avatar {
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--mint); flex-shrink: 0; margin-top: 2px;
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+  }
+  .speech-avatar svg { width: 34px; height: 34px; }
+
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 24px 22px;
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 18px;
+  }
+
+  .headline {
+    font-family: 'Zen Maru Gothic', sans-serif;
+    font-size: 17.5px;
+    line-height: 1.75;
+    font-weight: 700;
+    color: var(--ink);
+  }
+
+  .body-text { font-size: 14.5px; line-height: 1.9; color: var(--ink); }
+  .body-text + .body-text { margin-top: -8px; }
+
+  /* Tap grid: large, thumb-friendly, no typing */
+  .tap-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+  }
+  .tap-grid.single-col { grid-template-columns: 1fr; }
+
+  .tap-card {
+    background: var(--cream);
+    border: 1.5px solid var(--border);
+    border-radius: 16px;
+    padding: 16px 10px;
+    text-align: center;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease, transform 0.1s ease;
+  }
+  .tap-card .emoji { display: block; font-size: 24px; margin-bottom: 6px; }
+  .tap-card:hover { border-color: var(--mint-deep); background: var(--mint); }
+  .tap-card:active { transform: scale(0.96); }
+  .tap-card:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
+
+  .pill {
+    text-align: left;
+    background: var(--cream);
+    border: 1.5px solid var(--border);
+    border-radius: 999px;
+    padding: 13px 18px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 14px;
+    color: var(--ink);
+    cursor: pointer;
+    transition: border-color 0.15s ease, background 0.15s ease;
+  }
+  .pill:hover { border-color: var(--mint-deep); background: var(--mint); }
+  .pill:active { transform: scale(0.98); }
+  .pill:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
+
+  .actions { display: flex; gap: 10px; }
+  .btn {
+    flex: 1; border: none; border-radius: 999px; padding: 14px 16px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 14px; font-weight: 700; cursor: pointer;
+  }
+  .btn-primary { background: var(--leaf); color: #FFFFFF; }
+  .btn-primary:hover { background: var(--mint-deep); }
+  .btn-quiet { background: transparent; color: var(--ink-soft); border: 1.5px solid var(--border); font-weight: 500; font-size: 13px; }
+  .btn-quiet:hover { border-color: var(--ink-soft); }
+  .btn:focus-visible { outline: 2px solid var(--leaf); outline-offset: 2px; }
+  .btn:active { transform: scale(0.97); }
+
+  .skip-link {
+    text-align: center;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+  }
+  .skip-link:hover { color: var(--ink); }
+
+  .dots { display: flex; justify-content: center; gap: 6px; margin-top: 18px; }
+  .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--border); }
+  .dot.active { background: var(--coral); }
+
+  .log { margin-top: 26px; }
+  .log-title { font-size: 12.5px; color: var(--ink-soft); margin-bottom: 10px; }
+  .log-item {
+    display: flex; align-items: baseline; gap: 10px;
+    padding: 10px 0; border-top: 1px solid var(--border); font-size: 13.5px;
+  }
+  .log-item:first-child { border-top: none; }
+  .log-mark { font-size: 15px; color: var(--coral-deep); }
+  .log-task { flex: 1; color: var(--ink); }
+  .log-when { color: var(--ink-soft); font-size: 12px; white-space: nowrap; }
+  .empty-log { font-size: 13px; color: var(--ink-soft); padding: 6px 0; }
+
+  .notify-block { margin-top: 22px; text-align: center; }
+  .btn-notify {
+    width: 100%;
+    background: var(--surface);
+    border: 1.5px solid var(--mint-deep);
+    color: var(--leaf);
+    border-radius: 999px;
+    padding: 13px 16px;
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 13.5px;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  .btn-notify:disabled { opacity: 0.55; cursor: default; }
+  .notify-status { font-size: 12px; color: var(--ink-soft); margin-top: 8px; }
+
+  /* --- AIチャット --- */
+  #nobisuke-chat {
+    max-width: 420px;
+    margin: 24px auto 0;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    padding: 18px;
+    background: var(--surface);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+  }
+  #nobisuke-log {
+    height: 320px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin-bottom: 12px;
+  }
+  .nobisuke-msg {
+    padding: 8px 12px;
+    border-radius: 12px;
+    max-width: 80%;
+    line-height: 1.5;
+    white-space: pre-wrap;
+    font-size: 14px;
+  }
+  .nobisuke-msg.user {
+    align-self: flex-end;
+    background: var(--coral);
+    color: #fff;
+  }
+  .nobisuke-msg.ai {
+    align-self: flex-start;
+    background: var(--mint);
+    color: var(--ink);
+  }
+  #nobisuke-form {
+    display: flex;
+    gap: 8px;
+  }
+  #nobisuke-input {
+    flex: 1;
+    padding: 10px 14px;
+    border-radius: 999px;
+    border: 1.5px solid var(--border);
+    font-family: 'Zen Kaku Gothic New', sans-serif;
+    font-size: 14px;
+  }
+  #nobisuke-form button {
+    padding: 10px 18px;
+    border-radius: 999px;
+    border: none;
+    background: var(--leaf);
+    color: white;
+    font-weight: 700;
+    cursor: pointer;
+  }
+  #nobisuke-form button:hover { background: var(--mint-deep); }
+</style>
+</head>
+<body>
+
+<div class="app">
+
+  <div class="mascot-panel">
+    <svg class="mascot-svg" id="mascotSvg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+      <g class="leaf-wiggle">
+        <path d="M60 26 C52 18 50 8 58 4 C62 12 62 20 60 26 Z" fill="#5FA070"/>
+        <path d="M60 26 C68 18 70 8 62 4 C58 12 58 20 60 26 Z" fill="#7FB893"/>
+      </g>
+      <path d="M20 68 C20 38 38 18 60 18 C82 18 100 38 100 68 C100 94 82 110 60 110 C38 110 20 94 20 68 Z" fill="var(--mint)" stroke="#7FB893" stroke-width="2.5"/>
+      <ellipse cx="60" cy="78" rx="20" ry="16" fill="#FBF6EC" opacity="0.7"/>
+
+      <g class="normal-face">
+        <ellipse cx="38" cy="66" rx="6" ry="4" fill="var(--coral)" opacity="0.6"/>
+        <ellipse cx="82" cy="66" rx="6" ry="4" fill="var(--coral)" opacity="0.6"/>
+        <g class="eyes-open">
+          <ellipse cx="48" cy="58" rx="5.5" ry="6.5" fill="#4A443B"/>
+          <circle cx="49.6" cy="55.5" r="1.8" fill="#FFFFFF"/>
+          <ellipse cx="72" cy="58" rx="5.5" ry="6.5" fill="#4A443B"/>
+          <circle cx="73.6" cy="55.5" r="1.8" fill="#FFFFFF"/>
+        </g>
+        <g class="eyes-closed">
+          <path d="M42.5 58 Q48 62 53.5 58" stroke="#4A443B" stroke-width="2" fill="none" stroke-linecap="round"/>
+          <path d="M66.5 58 Q72 62 77.5 58" stroke="#4A443B" stroke-width="2" fill="none" stroke-linecap="round"/>
+        </g>
+        <path d="M52 72 Q60 78 68 72" stroke="#4A443B" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+        <ellipse cx="18" cy="80" rx="8" ry="6" fill="var(--mint)" stroke="#7FB893" stroke-width="2" transform="rotate(-20 18 80)"/>
+        <ellipse cx="102" cy="80" rx="8" ry="6" fill="var(--mint)" stroke="#7FB893" stroke-width="2" transform="rotate(20 102 80)"/>
+      </g>
+
+      <g class="happy-face">
+        <ellipse cx="38" cy="64" rx="7" ry="5" fill="var(--coral)" opacity="0.8"/>
+        <ellipse cx="82" cy="64" rx="7" ry="5" fill="var(--coral)" opacity="0.8"/>
+        <path d="M41 56 Q48 48 55 56" stroke="#4A443B" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <path d="M65 56 Q72 48 79 56" stroke="#4A443B" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+        <path d="M48 70 Q60 84 72 70" stroke="#4A443B" stroke-width="2.4" fill="none" stroke-linecap="round" fill-opacity="0"/>
+        <path d="M50 71 Q60 80 70 71 Q60 76 50 71 Z" fill="#7A4238" opacity="0.5"/>
+        <ellipse cx="14" cy="66" rx="8" ry="6" fill="var(--mint)" stroke="#7FB893" stroke-width="2" transform="rotate(-70 14 66)"/>
+        <ellipse cx="106" cy="66" rx="8" ry="6" fill="var(--mint)" stroke="#7FB893" stroke-width="2" transform="rotate(70 106 66)"/>
+        <g fill="var(--coral-deep)">
+          <path class="sparkle" d="M14 24 l2 5 5 2 -5 2 -2 5 -2 -5 -5 -2 5 -2 Z"/>
+          <path class="sparkle" d="M104 34 l1.6 4 4 1.6 -4 1.6 -1.6 4 -1.6 -4 -4 -1.6 4 -1.6 Z"/>
+          <path class="sparkle" d="M96 14 l1.6 4 4 1.6 -4 1.6 -1.6 4 -1.6 -4 -4 -1.6 4 -1.6 Z"/>
+        </g>
+      </g>
+    </svg>
+    <div class="name-tag">
+      <div class="name">のびすけ</div>
+      <div class="role">癒しの相棒</div>
+    </div>
+  </div>
+
+  <div class="card" id="card"></div>
+  <div class="dots" id="dots"></div>
+
+  <div class="log">
+    <div class="log-title">これまでの記録</div>
+    <div id="logList"></div>
+  </div>
+
+  <div class="notify-block">
+    <button class="btn-notify" id="notifyBtn">毎日18時に、のびすけから声をかけてもらう</button>
+    <div class="notify-status" id="notifyStatus"></div>
+  </div>
+
+  <!-- ▼▼ ここからAIチャット ▼▼ -->
+  <div id="nobisuke-chat">
+    <div id="nobisuke-log"></div>
+    <form id="nobisuke-form">
+      <input id="nobisuke-input" type="text" placeholder="のびすけに話しかけてみよう" autocomplete="off" />
+      <button type="submit">送信</button>
+    </form>
+  </div>
+  <!-- ▲▲ ここまでAIチャット ▲▲ -->
+
+</div>
+  <script>
+const MINI_AVATAR = `
+  <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 26 C52 18 50 8 58 4 C62 12 62 20 60 26 Z" fill="#5FA070"/>
+    <path d="M60 26 C68 18 70 8 62 4 C58 12 58 20 60 26 Z" fill="#7FB893"/>
+    <path d="M20 68 C20 38 38 18 60 18 C82 18 100 38 100 68 C100 94 82 110 60 110 C38 110 20 94 20 68 Z" fill="#CDE8D6" stroke="#7FB893" stroke-width="2.5"/>
+    <ellipse cx="38" cy="66" rx="6" ry="4" fill="#F3A98C" opacity="0.6"/>
+    <ellipse cx="82" cy="66" rx="6" ry="4" fill="#F3A98C" opacity="0.6"/>
+    <ellipse cx="48" cy="58" rx="5.5" ry="6.5" fill="#4A443B"/>
+    <circle cx="49.6" cy="55.5" r="1.8" fill="#FFFFFF"/>
+    <ellipse cx="72" cy="58" rx="5.5" ry="6.5" fill="#4A443B"/>
+    <circle cx="73.6" cy="55.5" r="1.8" fill="#FFFFFF"/>
+    <path d="M52 72 Q60 78 68 72" stroke="#4A443B" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+  </svg>
+`;
+
+const MINI_AVATAR_HAPPY = `
+  <svg viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+    <path d="M60 26 C52 18 50 8 58 4 C62 12 62 20 60 26 Z" fill="#5FA070"/>
+    <path d="M60 26 C68 18 70 8 62 4 C58 12 58 20 60 26 Z" fill="#7FB893"/>
+    <path d="M20 68 C20 38 38 18 60 18 C82 18 100 38 100 68 C100 94 82 110 60 110 C38 110 20 94 20 68 Z" fill="#CDE8D6" stroke="#7FB893" stroke-width="2.5"/>
+    <ellipse cx="38" cy="64" rx="7" ry="5" fill="#F3A98C" opacity="0.8"/>
+    <ellipse cx="82" cy="64" rx="7" ry="5" fill="#F3A98C" opacity="0.8"/>
+    <path d="M41 56 Q48 48 55 56" stroke="#4A443B" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <path d="M65 56 Q72 48 79 56" stroke="#4A443B" stroke-width="2.4" fill="none" stroke-linecap="round"/>
+    <path d="M50 71 Q60 80 70 71 Q60 76 50 71 Z" fill="#7A4238" opacity="0.5"/>
+  </svg>
+`;
+
+// タップだけで進められるよう、選択肢はすべて事前定義。文字入力は一切求めない。
+const CATEGORIES = [
+  { key: 'work', label: '仕事', emoji: '💼' },
+  { key: 'study', label: '勉強', emoji: '📚' },
+  { key: 'home', label: '家事', emoji: '🏠' },
+  { key: 'body', label: '運動', emoji: '🏃' },
+  { key: 'other', label: 'それ以外', emoji: '🌀' }
+];
+
+const TYPES = {
+  tired: {
+    label: '疲れてて動けない',
+    suggest: (task) => `今日はやらなくていい。その代わり、「${task}」に関わるものをひとつだけ、視界に入れてみない? 触らなくていいから。`,
+    action: '5分だけ触ってみる'
+  },
+  vague: {
+    label: '何から手をつけていいか分からない',
+    suggest: (task) => `「${task}」を、いちばん小さい動作まで分解しよう。どれならできそう?`,
+    microOptionsByCategory: {
+      work: ['メールを1件だけ開く', 'PCを起動するだけ', '資料のタイトルだけ書く'],
+      study: ['テキストを1ページだけ開く', 'ノートを机に出すだけ', '単語を1つだけ調べる'],
+      home: ['シンクの前に立つだけ', '洗濯物を1枚だけたたむ', 'ゴミ袋を1つ用意する'],
+      body: ['ウェアに着替えるだけ', 'その場で1回伸びをする', '玄関で靴を履くだけ'],
+      other: ['道具を1つだけ用意する', '机の前に座るだけ', '1分だけタイマーをセットする']
+    }
+  },
+  perfectionist: {
+    label: '失敗するのが怖い',
+    suggest: (task) => `今日は70点でいいよ。「${task}」は途中まででも花マル。`,
+    action: '途中まででやってみる'
+  },
+  meaningless: {
+    label: 'そもそも意味を感じない',
+    suggest: (task) => `「${task}」を最初にやろうと思った理由に、いちばん近いのはどれ?`,
+    microOptionsByCategory: {
+      work: ['評価されたいから', '締め切りがあるから', '任された責任があるから'],
+      study: ['できるようになりたいから', '将来役立つと思ったから', '試験があるから'],
+      home: ['快適に過ごしたいから', '誰かに気持ちよく使ってほしいから', 'ただ気になっていたから'],
+      body: ['健康でいたいから', '理想の自分に近づきたいから', 'なんとなく始めたから'],
+      other: ['達成感が欲しいから', '誰かのためだから', '本当はやりたいことだから']
+    }
+  }
+};
+
+const state = { stage: 'start', task: '', categoryKey: 'other', type: null, microTask: '', log: [] };
+
+function speechCard(html) {
+  return `<div class="speech-wrap"><div class="speech-avatar">${MINI_AVATAR}</div><div style="flex:1;">${html}</div></div>`;
+}
+
+function render() {
+  const card = document.getElementById('card');
+  const dots = document.getElementById('dots');
+  const mascotSvg = document.getElementById('mascotSvg');
+  const isHappy = state.stage === 'done' && state.log[0] && state.log[0].outcome === 'done';
+  mascotSvg.classList.toggle('is-happy', isHappy);
+  const stageOrder = ['start', 'empathy', 'suggestion', 'commit', 'done'];
+  dots.innerHTML = stageOrder.map(s => `<div class="dot ${s === state.stage ? 'active' : ''}"></div>`).join('');
+
+  if (state.stage === 'start') {
+    card.innerHTML = `
+      ${speechCard(`<div class="headline">今回、何が出来なかった?</div>`)}
+      <div class="tap-grid">
+        ${CATEGORIES.map(c => `
+          <div class="tap-card" data-key="${c.key}" data-label="${c.label}">
+            <span class="emoji">${c.emoji}</span>${c.label}
+          </div>
+        `).join('')}
+      </div>
+    `;
+    card.querySelectorAll('.tap-card').forEach(el => {
+      el.onclick = () => {
+        state.task = el.dataset.label;
+        state.categoryKey = el.dataset.key;
+        state.stage = 'empathy';
+        render();
+      };
+    });
+    return;
+  }
+
+  if (state.stage === 'empathy') {
+    card.innerHTML = `
+      ${speechCard(`
+        <div class="body-text">「${state.task}」かぁ。気が乗らない日、あるよね。</div>
+        <div class="headline" style="margin-top:14px;">今の感じに近いのはどれ?</div>
+      `)}
+      <div class="options" style="display:flex; flex-direction:column; gap:10px;">
+        ${Object.entries(TYPES).map(([key, t]) => `<button class="pill" data-type="${key}">${t.label}</button>`).join('')}
+      </div>
+    `;
+    card.querySelectorAll('.pill').forEach(btn => {
+      btn.onclick = () => {
+        state.type = btn.dataset.type;
+        state.stage = 'suggestion';
+        render();
+      };
+    });
+    return;
+  }
+
+  if (state.stage === 'suggestion') {
+    const t = TYPES[state.type];
+    if (t.microOptionsByCategory) {
+      const opts = t.microOptionsByCategory[state.categoryKey] || t.microOptionsByCategory.other;
+      card.innerHTML = `
+        ${speechCard(`<div class="body-text">${t.suggest(state.task)}</div>`)}
+        <div class="options" style="display:flex; flex-direction:column; gap:10px;">
+          ${opts.map((opt, i) => `<button class="pill" data-i="${i}">${opt}</button>`).join('')}
+        </div>
+        <button class="skip-link" id="skipBtn">今日はやめとく</button>
+      `;
+      card.querySelectorAll('.pill').forEach(btn => {
+        btn.onclick = () => {
+          state.microTask = opts[btn.dataset.i];
+          state.stage = 'commit';
+          render();
+        };
+      });
+      document.getElementById('skipBtn').onclick = () => {
+        state.log.unshift({ task: state.task, outcome: 'skip', at: new Date() });
+        state.stage = 'done';
+        render();
+      };
+    } else {
+      card.innerHTML = `
+        ${speechCard(`<div class="body-text">${t.suggest(state.task)}</div>`)}
+        <div class="actions">
+          <button class="btn btn-quiet" id="skipBtn">今日はやめとく</button>
+          <button class="btn btn-primary" id="tryBtn">${t.action}</button>
+        </div>
+      `;
+      document.getElementById('skipBtn').onclick = () => {
+        state.log.unshift({ task: state.task, outcome: 'skip', at: new Date() });
+        state.stage = 'done';
+        render();
+      };
+      document.getElementById('tryBtn').onclick = () => {
+        state.microTask = t.action;
+        state.stage = 'commit';
+        render();
+      };
+    }
+    return;
+  }
+
+  if (state.stage === 'commit') {
+    card.innerHTML = `
+      ${speechCard(`
+        <div class="headline">じゃあ、これだけ。</div>
+        <div class="body-text" style="margin-top:10px;">「${state.microTask}」</div>
+      `)}
+      <div class="actions">
+        <button class="btn btn-quiet" id="notYetBtn">やっぱり無理だった</button>
+        <button class="btn btn-primary" id="doneBtn">できた</button>
+      </div>
+    `;
+    document.getElementById('notYetBtn').onclick = () => {
+      state.log.unshift({ task: state.task, outcome: 'notyet', at: new Date() });
+      state.stage = 'done';
+      render();
+    };
+    document.getElementById('doneBtn').onclick = () => {
+      state.log.unshift({ task: state.task, outcome: 'done', at: new Date() });
+      state.stage = 'done';
+      render();
+    };
+    return;
+  }
+
+  if (state.stage === 'done') {
+    const last = state.log[0];
+    const messages = {
+      done: 'やったね! 小さくても、ちゃんと動けたよ。',
+      notyet: '無理な日もある。自分を責めないで。',
+      skip: 'それでいい。また来てね。'
+    };
+    const avatarHtml = last.outcome === 'done' ? MINI_AVATAR_HAPPY : MINI_AVATAR;
+    card.innerHTML = `
+      <div class="speech-wrap"><div class="speech-avatar">${avatarHtml}</div><div style="flex:1;"><div class="body-text" style="font-size:15.5px;">${messages[last.outcome]}</div></div></div>
+      <div class="actions">
+        <button class="btn btn-primary" id="restartBtn">また話す</button>
+      </div>
+    `;
+    document.getElementById('restartBtn').onclick = () => {
+      state.stage = 'start';
+      state.task = '';
+      state.categoryKey = 'other';
+      state.type = null;
+      state.microTask = '';
+      render();
+    };
+    renderLog();
+    return;
+  }
+}
+
+function renderLog() {
+  const list = document.getElementById('logList');
+  if (state.log.length === 0) {
+    list.innerHTML = `<div class="empty-log">まだ記録はありません</div>`;
+    return;
+  }
+  const marks = { done: '◎', notyet: '△', skip: '－' };
+  list.innerHTML = state.log.map(item => `
+    <div class="log-item">
+      <span class="log-mark">${marks[item.outcome]}</span>
+      <span class="log-task">${item.task}</span>
+      <span class="log-when">${item.at.getMonth()+1}/${item.at.getDate()} ${String(item.at.getHours()).padStart(2,'0')}:${String(item.at.getMinutes()).padStart(2,'0')}</span>
+    </div>
+  `).join('');
+}
+
+render();
+renderLog();
+
+// ---- プッシュ通知 ----
+const VAPID_PUBLIC_KEY = 'BOopObT0-7KlbuniKg3nOKOudh0Sox6WPLFGNAzcu0gpr7kOmMWhwYDbDmpVxZkjnXkh0xKZiVlC-sdEGX3lGzI';
+
+function urlBase64ToUint8Array(base64String) {
+  const padding = '='.repeat((4 - (base64String.length % 4)) % 4);
+  const base64 = (base64String + padding).replace(/-/g, '+').replace(/_/g, '/');
+  const rawData = atob(base64);
+  const outputArray = new Uint8Array(rawData.length);
+  for (let i = 0; i < rawData.length; i++) {
+    outputArray[i] = rawData.charCodeAt(i);
+  }
+  return outputArray;
+}
+
+function setNotifyStatus(text) {
+  const el = document.getElementById('notifyStatus');
+  if (el) el.textContent = text;
+}
+
+async function initNotifyButton() {
+  const btn = document.getElementById('notifyBtn');
+  if (!btn) return;
+
+  if (!('serviceWorker' in navigator) || !('PushManager' in window)) {
+    btn.disabled = true;
+    setNotifyStatus('この端末・ブラウザは通知に対応していません');
+    return;
+  }
+
+  const registration = await navigator.serviceWorker.register('/sw.js');
+  const existing = await registration.pushManager.getSubscription();
+
+  if (existing || Notification.permission === 'denied') {
+    updateButtonForState(existing);
+  }
+
+  function updateButtonForState(sub) {
+    if (Notification.permission === 'denied') {
+      btn.disabled = true;
+      setNotifyStatus('通知がブロックされています(端末の設定から許可できます)');
+    } else if (sub) {
+      btn.textContent = '通知はオンです';
+      btn.disabled = true;
+      setNotifyStatus('毎日18時に、のびすけが声をかけます');
+    }
+  }
+
+  btn.onclick = async () => {
+    btn.disabled = true;
+    setNotifyStatus('設定中…');
+    try {
+      const permission = await Notification.requestPermission();
+      if (permission !== 'granted') {
+        setNotifyStatus('通知が許可されませんでした');
+        btn.disabled = false;
+        return;
+      }
+      const subscription = await registration.pushManager.subscribe({
+        userVisibleOnly: true,
+        applicationServerKey: urlBase64ToUint8Array(VAPID_PUBLIC_KEY)
+      });
+      await fetch('/api/subscribe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(subscription)
+      });
+      updateButtonForState(subscription);
+    } catch (err) {
+      setNotifyStatus('設定に失敗しました。もう一度お試しください');
+      btn.disabled = false;
+    }
+  };
+}
+
+initNotifyButton();
+
+// ---- AIチャット(のびすけと話す) ----
+(function () {
+  const SESSION_KEY = "nobisuke_session_id";
+  let sessionId = localStorage.getItem(SESSION_KEY);
+  if (!sessionId) {
+    sessionId = crypto.randomUUID();
+    localStorage.setItem(SESSION_KEY, sessionId);
+  }
+
+  const chatLog = document.getElementById("nobisuke-log");
+  const chatForm = document.getElementById("nobisuke-form");
+  const chatInput = document.getElementById("nobisuke-input");
+
+  function appendChatMessage(text, sender) {
+    const el = document.createElement("div");
+    el.className = "nobisuke-msg " + sender;
+    el.textContent = text;
+    chatLog.appendChild(el);
+    chatLog.scrollTop = chatLog.scrollHeight;
+  }
+
+  chatForm.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const message = chatInput.value.trim();
+    if (!message) return;
+
+    appendChatMessage(message, "user");
+    chatInput.value = "";
+    chatInput.disabled = true;
+
+    try {
+      const res = await fetch("/api/chat", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message, sessionId }),
+      });
+      const data = await res.json();
+      if (data.reply) {
+        appendChatMessage(data.reply, "ai");
+      } else {
+        appendChatMessage("うまく応答できませんでした…もう一度話しかけてみてね", "ai");
+      }
+    } catch (err) {
+      appendChatMessage("通信エラーが発生しました", "ai");
+    } finally {
+      chatInput.disabled = false;
+      chatInput.focus();
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
