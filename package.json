@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "web-push": "^3.6.7"
+    "web-push": "^3.6.7",
+    "@anthropic-ai/sdk": "latest",
+    "@upstash/redis": "latest"
   }
 }
